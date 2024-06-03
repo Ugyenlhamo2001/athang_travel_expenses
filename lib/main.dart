@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:travel_expenses/hoc/home_layout.dart';
 import 'package:travel_expenses/screens/Landing/home_screen.dart';
 import 'package:travel_expenses/screens/splash_screen.dart';
+import 'package:travel_expenses/widgets/own_profile.dart';
+import 'package:travel_expenses/widgets/profile.dart';
+import 'package:travel_expenses/widgets/update_current_balance.dart';
 
 import 'plugins/local_shared_preferences.dart';
 
@@ -22,7 +25,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: SplashScreen(),
+      home: OwnProfile(),
     );
   }
 }

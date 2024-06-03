@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
             width: double.infinity,
             child: SingleChildScrollView(
               child: Column(
-                children: [HomeSummary(), AccountHome(), SummaryTransactions()],
+                children: [HomeSummary(), Accounthome(), SummaryTransactions()],
               ),
             ),
           ),

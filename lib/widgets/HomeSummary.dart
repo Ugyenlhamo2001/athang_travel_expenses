@@ -1,15 +1,19 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:travel_expenses/base/style/text_style.dart';
 import 'package:travel_expenses/domain/landing/summary_model.dart';
-import 'package:travel_expenses/domain/landing/summary_repo.dart';
+import 'package:travel_expenses/plugins/http.dart';
 
 class HomeSummary extends StatefulWidget {
+  const HomeSummary({super.key});
+
   @override
-  State<HomeSummary> createState() => _SummaryHomeState();
+  _HomeSummaryState createState() => _HomeSummaryState();
 }
 
-class _SummaryHomeState extends State<HomeSummary> {
-  SummaryModel summary = SummaryModel();
+class _HomeSummaryState extends State<HomeSummary> {
+  SummaryData summary = SummaryData();
 
   @override
   void initState() {
@@ -18,9 +22,17 @@ class _SummaryHomeState extends State<HomeSummary> {
   }
 
   Future<void> loadData() async {
-    SummaryModel res = await loadSummaryData();
+    final res = await GetRequest('summary');
+    final temp = jsonDecode(res.body)['data'];
+
     setState(() {
-      summary = res;
+      summary = SummaryData(
+        expenses: temp['expenses'],
+        income: temp['income'],
+        openingBalance: temp['openingBalance'],
+        maxExpense: temp['maxExpense'],
+        totalTransactionsThisMonth: temp['totalTransactionsThisMonth'],
+      );
     });
   }
 
@@ -40,7 +52,7 @@ class _SummaryHomeState extends State<HomeSummary> {
                     ),
               ),
               Text(
-                'Nu.' + summary.openingBalance.toString(),
+                'Rs.${summary.openingBalance}',
                 style: TypoStyles().kPageHeader.copyWith(
                       color: Colors.white,
                       fontSize: 16,
@@ -86,7 +98,7 @@ class _SummaryHomeState extends State<HomeSummary> {
                         ),
                         SizedBox(height: 4),
                         Text(
-                          'Rs.34,000',
+                          'Rs.${summary.income}',
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.black,
@@ -116,7 +128,7 @@ class _SummaryHomeState extends State<HomeSummary> {
                         ),
                         SizedBox(height: 4),
                         Text(
-                          'Rs.20,000',
+                          'Rs.${summary.expenses}',
                           style: TextStyle(
                             fontSize: 14,
                             color: Colors.black,

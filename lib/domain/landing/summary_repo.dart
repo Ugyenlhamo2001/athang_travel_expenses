@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'package:travel_expenses/domain/landing/summary_model.dart';
 import 'package:travel_expenses/plugins/http.dart';
 
-Future<SummaryModel> loadSummaryData() async {
+Future<SummaryData> loadSummaryData() async {
   final res = await GetRequest('summary');
   print(jsonDecode(res.body));
   final temp = jsonDecode(res.body)['data'];
-  return SummaryModel(
+  return SummaryData(
     expenses: temp['expenses'],
     income: temp['income'],
     openingBalance: temp['openingBalance'],
