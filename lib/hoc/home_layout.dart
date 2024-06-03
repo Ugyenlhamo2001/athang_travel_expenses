@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:travel_expenses/screens/Landing/home_screen.dart';
 import 'package:travel_expenses/screens/account/account_screen.dart';
+import 'package:travel_expenses/widgets/Add_transaction.dart';
+import 'package:travel_expenses/widgets/Transaction.dart';
+import 'package:travel_expenses/widgets/own_profile.dart';
 
 class HomeLayout extends StatefulWidget {
   const HomeLayout({super.key});
@@ -12,10 +15,17 @@ class HomeLayout extends StatefulWidget {
 class _HomeLayoutState extends State<HomeLayout> {
   int _selectedIndex = 0;
 
-  List<String> titles = ['Home', 'Account'];
+  List<String> titles = [
+    'Home',
+    "Transactions",
+    "Add",
+    "Profile",
+  ];
   List<Widget> screens = [
     HomeScreen(),
-    AccountScreen(),
+    TransactionsScreen(),
+    AddTransaction(),
+    OwnProfile(),
   ];
 
   @override
@@ -32,11 +42,14 @@ class _HomeLayoutState extends State<HomeLayout> {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
           BottomNavigationBarItem(
-              icon: Icon(Icons.edit_document), label: 'Document'),
+              icon: Icon(Icons.home),
+              label: 'Home',
+              backgroundColor: Colors.orange),
           BottomNavigationBarItem(
-              icon: Icon(Icons.account_circle), label: 'Account'),
+              icon: Icon(Icons.edit_document), label: 'Transaction'),
+          BottomNavigationBarItem(icon: Icon(Icons.add), label: 'Add'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profile'),
         ],
       ),
     );

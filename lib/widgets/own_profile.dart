@@ -22,23 +22,10 @@ class OwnProfile extends StatelessWidget {
         children: [
           SizedBox(height: 60),
           Center(
-            child: CustomPaint(
-              size: Size(150, 150),
-              painter: DashedCirclePainter(),
-              child: Container(
-                width: 150,
-                height: 150,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                ),
-                child: ClipOval(
-                  child: Icon(
-                    Icons.person,
-                    size: 80,
-                    color: Colors.black,
-                  ),
-                ),
-              ),
+            child: CircleAvatar(
+              radius: 75,
+              backgroundImage: NetworkImage(
+                  'https://th.bing.com/th/id/OIP.XTUERo6Cq_1XK2oldeKStwHaDn?rs=1&pid=ImgDetMain'),
             ),
           ),
           SizedBox(height: 40),
@@ -55,7 +42,7 @@ class OwnProfile extends StatelessWidget {
                 ),
                 SizedBox(height: 10), // Space between the texts
                 Text(
-                  'Software Developer',
+                  'Software Engineer',
                   style: TextStyle(color: Colors.black, fontSize: 15),
                 ),
                 SizedBox(height: 10), // Space between the texts
@@ -69,7 +56,7 @@ class OwnProfile extends StatelessWidget {
                     ),
                     SizedBox(width: 5),
                     Text(
-                      '24th Dec, 1997',
+                      '24th February, 1977',
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 18,
@@ -107,7 +94,7 @@ class OwnProfile extends StatelessWidget {
                   children: [
                     SizedBox(width: 5),
                     Text(
-                      'Nu.70000',
+                      'Nu.17,000',
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 26,
@@ -126,7 +113,7 @@ class OwnProfile extends StatelessWidget {
                   children: [
                     SizedBox(width: 5),
                     Text(
-                      'Nu.70000',
+                      'Nu.13,000',
                       style: TextStyle(
                           color: Colors.black,
                           fontSize: 26,
@@ -142,39 +129,3 @@ class OwnProfile extends StatelessWidget {
     );
   }
 }
-
-class DashedCirclePainter extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    double dashWidth = 5, dashSpace = 3;
-    final paint = Paint()
-      ..color = Colors.black
-      ..strokeWidth = 2
-      ..style = PaintingStyle.stroke;
-
-    double radius = size.width / 2;
-    double circumference = 2 * 3.141592653589793 * radius;
-    double dashCount = circumference / (dashWidth + dashSpace);
-
-    for (int i = 0; i < dashCount; ++i) {
-      double startAngle = (i * (dashWidth + dashSpace)) / radius;
-      double sweepAngle = dashWidth / radius;
-      canvas.drawArc(
-        Rect.fromCircle(center: Offset(radius, radius), radius: radius),
-        startAngle,
-        sweepAngle,
-        false,
-        paint,
-      );
-    }
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => false;
-}
-
-// void main() {
-//   runApp(MaterialApp(
-//     home: OwnProfile(),
-//   ));
-// }

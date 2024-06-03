@@ -13,7 +13,7 @@ class UpdateCurrentBalance extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(75.0),
+        preferredSize: Size.fromHeight(67.0),
         child: AppBar(
           backgroundColor: Colors.deepOrange,
           title: Text(
