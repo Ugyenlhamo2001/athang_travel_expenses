@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_expenses/base/style/text_style.dart';
+import 'package:travel_expenses/hoc/home_layout.dart';
 import 'package:travel_expenses/screens/auth/login_screen.dart';
-import 'package:travel_expenses/screens/landing/home_screen.dart';
 
 import '../plugins/local_shared_preferences.dart';
 
@@ -22,11 +22,9 @@ class _SplashScreenState extends State<SplashScreen> {
   Future<void> checkIfUserIsLoggedIn() async {
     // final SharedPreferences prefs = await SharedPreferences.getInstance();
     final token = await getTokenFromLocalStorage();
-    print('inside method');
-    print(token);
     if (token != '') {
       Navigator.of(context)
-          .pushReplacement(MaterialPageRoute(builder: (_) => HomeScreen()));
+          .pushReplacement(MaterialPageRoute(builder: (_) => HomeLayout()));
     } else {
       Navigator.of(context)
           .push(MaterialPageRoute(builder: (_) => LoginScreen()));

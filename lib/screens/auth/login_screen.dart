@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:travel_expenses/domain/models/auth_model.dart/auth_model.dart';
 import 'package:travel_expenses/domain/repo/auth_repo.dart';
 
+import '../../hoc/home_layout.dart';
 import '../landing/home_screen.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -22,14 +23,15 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Future<void> loginUser() async {
     try {
-      if (!_formKey.currentState!.validate()) {
+      if (_formKey.currentState!.validate()) {
         setState(() {
           loading = true;
         });
         final res = await AuthRepo().loginWithEmailAndPassword(
             AuthModel(username: _username.text, password: _password.text));
+
         Navigator.of(context)
-            .pushReplacement(MaterialPageRoute(builder: (_) => HomeScreen()));
+            .pushReplacement(MaterialPageRoute(builder: (_) => HomeLayout()));
       }
     } catch (e) {
       ScaffoldMessenger.of(context)

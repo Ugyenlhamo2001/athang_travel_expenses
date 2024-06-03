@@ -6,7 +6,7 @@ Future<String> getTokenFromLocalStorage() async {
   return token ?? '';
   // return token != null ? token : '';
 }
-
+ 
 Future<void> setTokenToLocalStorage(String token) async {
   final SharedPreferences prefs = await SharedPreferences.getInstance();
   await prefs.setString('_TOKEN', token);
@@ -22,6 +22,7 @@ class LocalStorage {
   static SharedPreferences? _prefs;
 
   late SharedPreferences prefs;
+  
   LocalStorage() {
     futureShared = SharedPreferences.getInstance();
     futureShared?.then((SharedPreferences shared) {
